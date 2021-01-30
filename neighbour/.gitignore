@@ -47,6 +47,7 @@
 
 config/local.js
 config/custom.js
+custom.js
 
 ################################################
 # Dependencies
