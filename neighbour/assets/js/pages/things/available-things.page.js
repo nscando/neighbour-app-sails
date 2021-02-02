@@ -18,8 +18,11 @@ parasails.registerPage("available-things", {
   //  ║║║║ ║ ║╣ ╠╦╝╠═╣║   ║ ║║ ║║║║╚═╗
   //  ╩╝╚╝ ╩ ╚═╝╩╚═╩ ╩╚═╝ ╩ ╩╚═╝╝╚╝╚═╝
   methods: {
-    clickThing: function (thingId) {
+    clickThing: async function (thingId) {
       console.log("clicked thing #" + thingId);
+      await Cloud.destroyOneThing.with({ id: thingId });
+      _.remove(this.things, { id: thingId });
+      this.$forceUpdate();
     },
   },
 });

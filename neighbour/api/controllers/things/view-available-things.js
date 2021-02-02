@@ -10,8 +10,21 @@ module.exports = {
   },
 
   fn: async function () {
-    //TODO: come back to this and only fetch things that the current user is allowed to see.
-    var things = await Thing.find();
-    return { things };
+    var url = require("url");
+
+    // Get the list of things this user can see.
+    var things = await Thing.find({
+      or: [
+        // Friend things:
+        { owner: { in: _.pluck(this.req.me.friends, "id") } },
+        // My things:
+        { owner: this.req.me.id },
+      ],
+    }).populate("owner");
+
+    // Respond with view.
+    return {
+      things: things,
+    };
   },
 };
