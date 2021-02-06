@@ -11,6 +11,10 @@ module.exports = {
   },
 
   exits: {
+    notFound: {
+      description: "No such thing with that ID exist.",
+      responseType: "notFound",
+    },
     forbidden: {
       description:
         " The User making this request doesn`t have permissions to delete this thing!",
@@ -23,7 +27,10 @@ module.exports = {
       id: inputs.id,
     });
 
-    if (thing.owner !== this.req.id) {
+    if (!thing) {
+      throw "notFound";
+    }
+    if (thing.owner !== this.req.me.id) {
       throw "forbidden";
     }
 

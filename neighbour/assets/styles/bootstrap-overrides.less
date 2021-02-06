@@ -15,13 +15,24 @@ img {
 }
 
 // Get rid of weird background on <a>s with button styles
-.btn, [type='button'] {
+.btn,
+[type="button"] {
   -webkit-appearance: none;
 }
 
 // Custom link styles within bodies of text
-h1, h2, h3, h4, h5, h6, p, li, blockquote, label {
-  >a:not(.btn), small >a:not(.btn) {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+blockquote,
+label {
+  > a:not(.btn),
+  small > a:not(.btn) {
     color: @brand;
     border-bottom: 1px solid @text-normal;
     &:hover {

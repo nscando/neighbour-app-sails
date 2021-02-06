@@ -10,13 +10,12 @@ module.exports = {
   },
 
   fn: async function () {
-    var url = require("url");
-
     // Get the list of things this user can see.
     var things = await Thing.find({
       or: [
         // Friend things:
-        { owner: { in: _.pluck(this.req.me.friends, "id") } },
+        //prettier-ignore
+        { owner: { 'in': _.pluck(this.req.me.friends, "id") } },
         // My things:
         { owner: this.req.me.id },
       ],
@@ -24,6 +23,7 @@ module.exports = {
 
     // Respond with view.
     return {
+      currentSection: things,
       things: things,
     };
   },
