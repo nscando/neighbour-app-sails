@@ -71,6 +71,10 @@ module.exports.routes = {
     action: "deliver-contact-form-message",
   },
 
+  "POST  /api/v1/things": {
+    action: "things/upload-thing",
+  },
+
   "DELETE  /api/v1/things/destroy-one-thing": {
     action: "things/destroy-one-thing",
   },

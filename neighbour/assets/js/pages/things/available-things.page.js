@@ -10,6 +10,7 @@ parasails.registerPage("available-things", {
     uploadThingModalOpen: false,
     uploadFormData: {
       label: "",
+      photo: undefined,
     },
 
     //Syncing /loading state
@@ -71,6 +72,7 @@ parasails.registerPage("available-things", {
       //Reset form  data
       this.uploadFormData = {
         label: "",
+        photo: undefined,
       };
       //Clear error states
       this.formErrors = {};
@@ -101,6 +103,15 @@ parasails.registerPage("available-things", {
 
       //Close the modal.
       this._clearUploadThingModal();
+    },
+
+    changeFileInput: function (files) {
+      var selectedFile = files[0];
+      if (!selectedFile) {
+        this.uploadFormData.photo = undefined;
+        return;
+      }
+      this.uploadFormData.photo = selectedFile;
     },
   },
 });
