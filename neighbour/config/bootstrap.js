@@ -126,15 +126,16 @@ module.exports.bootstrap = async function () {
   //Add association friends
   await User.addToCollection(nico.id, "friends", angy.id);
 
-  await Thing.createEach([
-    { label: "My Camera", owner: nico.id },
-    { label: "Law MOwer", owner: angy.id },
-    { label: "Kenny G album", owner: rachael.id },
-    { label: "Sissors", owner: mike.id },
-    { label: "Bike", owner: angy.id },
-    { label: "Bike", owner: nico.id },
-    { label: "Bike", owner: angy.id },
-  ]).fetch();
+  // FUTURE : dicide what todo with all this
+  // await Thing.createEach([
+  //   { label: "My Camera", owner: nico.id },
+  //   { label: "Law MOwer", owner: angy.id },
+  //   { label: "Kenny G album", owner: rachael.id },
+  //   { label: "Sissors", owner: mike.id },
+  //   { label: "Bike", owner: angy.id },
+  //   { label: "Bike", owner: nico.id },
+  //   { label: "Bike", owner: angy.id },
+  // ]);
 
   // Save new bootstrap version
   await sails.helpers.fs.writeJson

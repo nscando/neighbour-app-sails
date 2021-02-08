@@ -79,6 +79,10 @@ module.exports.routes = {
     action: "things/destroy-one-thing",
   },
 
+  "GET  /api/v1/things/:id": {
+    action: "things/download-photo",
+  },
+
   "POST  /api/v1/observe-my-session": {
     action: "observe-my-session",
     hasSocketFeatures: true,

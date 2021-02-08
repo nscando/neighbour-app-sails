@@ -16,6 +16,18 @@ module.exports = {
       description: "A user-submitted label describing this thing.",
     },
 
+    imageUploadFd: {
+      type: "string",
+      description:
+        'The Skipper file descriptor uniquely identifies this uploaded image associated  with this "Thing"',
+      required: true,
+    },
+
+    imageUploadMime: {
+      type: "string",
+      description: "The MIME type for the uoloaded image.",
+      required: true,
+    },
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝

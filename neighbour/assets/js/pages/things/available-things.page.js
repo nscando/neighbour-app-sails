@@ -11,6 +11,7 @@ parasails.registerPage("available-things", {
     uploadFormData: {
       label: "",
       photo: undefined,
+      previewImageSrc: "",
     },
 
     //Syncing /loading state
@@ -26,7 +27,10 @@ parasails.registerPage("available-things", {
   //  ╦  ╦╔═╗╔═╗╔═╗╦ ╦╔═╗╦  ╔═╗
   //  ║  ║╠╣ ║╣ ║  ╚╦╝║  ║  ║╣
   //  ╩═╝╩╚  ╚═╝╚═╝ ╩ ╚═╝╩═╝╚═╝
-  beforeMount: function () {},
+  beforeMount: function () {
+    _.extend(this, SAILS_LOCALS);
+    // this.things = this._marshalEntries(this.things);
+  },
   mounted: async function () {
     //…
   },
@@ -52,7 +56,6 @@ parasails.registerPage("available-things", {
     },
 
     submittedDeleteThingForm: function () {
-      console.log("this works ok");
       _.remove(this.things, { id: this.selectedThing.id });
       this.$forceUpdate();
 
@@ -73,6 +76,7 @@ parasails.registerPage("available-things", {
       this.uploadFormData = {
         label: "",
         photo: undefined,
+        previewImageSrc: "",
       };
       //Clear error states
       this.formErrors = {};
@@ -99,19 +103,43 @@ parasails.registerPage("available-things", {
     },
 
     submittedUploadThingForm: function (result) {
-      //TODO
+      this.thing.push({
+        label: this.uploadFormData.label,
+        id: result.id,
+        owner: {
+          id: this.me.id,
+          fullName: this.me.fullName,
+        },
+      });
 
       //Close the modal.
       this._clearUploadThingModal();
     },
 
     changeFileInput: function (files) {
+      if (files.length !== 1 && !this.uploadFormData.photo) {
+        throw new Error(
+          "Consistency violation: `changeFileInput` was somehow called with an empty array of files, or with more tahn one file in the array! This should never happen unless ther is already an uploaded file tracked ."
+        );
+      }
       var selectedFile = files[0];
-      if (!selectedFile) {
-        this.uploadFormData.photo = undefined;
+
+      if (!selectedFile && this.uploadFormData.photo) {
         return;
       }
       this.uploadFormData.photo = selectedFile;
+
+      //Set up the file preview for the UI:
+
+      var reader = new FileReader();
+      reader.onload = (e) => {
+        this.uploadFormData.previewImageSrc = e.target.result;
+
+        //Unbind this "onload" event.
+        delete reader.onload;
+      };
+      this.formErrors.photo = false;
+      reader.readAsDataURL(selectedFile);
     },
   },
 });

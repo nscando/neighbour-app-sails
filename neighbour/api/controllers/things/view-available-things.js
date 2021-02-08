@@ -10,21 +10,30 @@ module.exports = {
   },
 
   fn: async function () {
-    // Get the list of things this user can see.
+    var url = require("url");
+
+    var me = await User.findOne({
+      id: this.req.me.id,
+    }).populate("friends");
+
+    var friendsIds = _.pluck(me.friends, "id");
     var things = await Thing.find({
-      or: [
-        // Friend things:
-        //prettier-ignore
-        { owner: { 'in': _.pluck(this.req.me.friends, "id") } },
-        // My things:
-        { owner: this.req.me.id },
-      ],
+      or: [{ owner: this.req.me.id }, { owner: { in: friendsIds } }],
     }).populate("owner");
+
+    _.each(things, (thing) => {
+      thing.imageSrc = url.resolve(
+        sails.config.custom.baseUrl,
+        "/api/v1/things/" + thing.id
+      );
+      delete thing.imageUploadFd;
+      delete thing.imageUploadMime;
+    });
 
     // Respond with view.
     return {
       currentSection: things,
-      things: things,
+      things,
     };
   },
 };
