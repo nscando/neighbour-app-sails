@@ -40,7 +40,6 @@ email status until they click the link in the confirmation email.`,
 
     password: {
       type: "string",
-      required: true,
       description:
         "Securely hashed representation of the user's login password.",
       protect: true,
@@ -181,6 +180,14 @@ without necessarily having a billing card.`,
     friends: {
       collection: "User",
       description: "All of the other users this user can share things with",
+    },
+    inboundFriendRequest: {
+      collection: "User",
+      via: "outboundFriendRequest",
+    },
+    outboundFriendRequest: {
+      collection: "User",
+      via: "inboundFriendRequest",
     },
   },
 };

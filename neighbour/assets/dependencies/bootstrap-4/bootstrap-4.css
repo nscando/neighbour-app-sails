@@ -180,7 +180,7 @@ sup {
 }
 
 a {
-  color: #007bff;
+  color: #28afb0;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
@@ -2895,10 +2895,10 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-info {
-  color: #17a2b8;
+  color: #ee964b;
   background-color: transparent;
   background-image: none;
-  border-color: #17a2b8;
+  border-color: #ee964b;
 }
 
 .btn-outline-info:hover {
@@ -3372,7 +3372,7 @@ input[type="button"].btn-block {
   padding: 0.5rem 1.5rem;
   margin-bottom: 0;
   font-size: 0.875rem;
-  color: #6c757d;
+  color: #f8fafc;
   white-space: nowrap;
 }
 
@@ -4582,7 +4582,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-dark .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.5);
+  color: #28afb0;
 }
 
 .navbar-dark .navbar-nav .nav-link:hover,
@@ -6484,7 +6484,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #343a40 !important;
+  background-color: #ffffff !important;
 }
 
 a.bg-dark:hover,

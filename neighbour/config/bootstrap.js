@@ -125,6 +125,11 @@ module.exports.bootstrap = async function () {
 
   //Add association friends
   await User.addToCollection(nico.id, "friends", angy.id);
+  await User.addToCollection(rachael.id, "friends", angy.id);
+  await User.addToCollection(nico.id, "friends", rachael.id);
+  await User.addToCollection(nico.id, "friends", mike.id);
+  await User.addToCollection(angy.id, "friends", mike.id);
+  await User.addToCollection(rachael.id, "friends", mike.id);
 
   // FUTURE : dicide what todo with all this
   // await Thing.createEach([
