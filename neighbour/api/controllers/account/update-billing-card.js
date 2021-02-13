@@ -71,7 +71,7 @@ module.exports = {
       .with({
         stripeCustomerId: this.req.me.stripeCustomerId,
         token: stripeToken || "",
-        plan: "enterprise",
+        // plan: "enterprise",
       })
       .timeout(5000)
       .retry();
